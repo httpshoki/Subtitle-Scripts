@@ -1,0 +1,9 @@
+@echo off
+# NETFLIX STYLE
+echo %1
+
+for %%A in (%1) do (   
+    ffmpeg -i %1 -vf "subtitles=subtitle.srt:force_style='Fontname=Consolas,BackColour=&H80000000,Spacing=0.2,Outline=0,Shadow=0.75'" -max_muxing_queue_size 9999 -c:v libx264 -crf 23 -bufsize 6M -preset faster -flags +global_header -pix_fmt yuv420p -profile:v baseline -movflags +faststart -c:a aac "output/%%~nxA"
+)
+
+pause
